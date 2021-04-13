@@ -1,0 +1,38 @@
+name: timepaycontrol
+description: A new Flutter project.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+vars: 
+    clean: flutter clean
+    get: flutter pub get
+    runner: flutter pub run build_runner
+scripts: 
+    mobx_build: $runner build
+    mobx_watch: $clean & $get & $runner watch
+    mobx_build_clean: $clean & $get & $runner build --delete-conflicting-outputs
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  dio: ^3.0.10
+  flutter_mobx: ^1.1.0+2
+  mobx: ^1.2.1+4
+  flutter_modular: ^3.0.2+1
+  date_util: ^0.1.4
+  hive: ^2.0.2
+  path_provider: ^2.0.1
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  modular_codegen:
+  mobx_codegen: ^1.1.2
+  build_runner: ^1.10.1
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
