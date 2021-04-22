@@ -39,6 +39,22 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$currentMonthWeekAtom =
+      Atom(name: '_HomeControllerBase.currentMonthWeek');
+
+  @override
+  List<WorkWeekNodel> get currentMonthWeek {
+    _$currentMonthWeekAtom.reportRead();
+    return super.currentMonthWeek;
+  }
+
+  @override
+  set currentMonthWeek(List<WorkWeekNodel> value) {
+    _$currentMonthWeekAtom.reportWrite(value, super.currentMonthWeek, () {
+      super.currentMonthWeek = value;
+    });
+  }
+
   final _$monthTextAtom = Atom(name: '_HomeControllerBase.monthText');
 
   @override
@@ -68,6 +84,22 @@ mixin _$HomeController on _HomeControllerBase, Store {
     _$selectedWorkDayAtom.reportWrite(value, super.selectedWorkDay, () {
       super.selectedWorkDay = value;
     });
+  }
+
+  final _$setWorkHourAsyncAction =
+      AsyncAction('_HomeControllerBase.setWorkHour');
+
+  @override
+  Future setWorkHour(int hours) {
+    return _$setWorkHourAsyncAction.run(() => super.setWorkHour(hours));
+  }
+
+  final _$setWorkWeekAsyncAction =
+      AsyncAction('_HomeControllerBase.setWorkWeek');
+
+  @override
+  Future setWorkWeek(WorkWeekNodel data) {
+    return _$setWorkWeekAsyncAction.run(() => super.setWorkWeek(data));
   }
 
   final _$_HomeControllerBaseActionController =
@@ -118,21 +150,11 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
-  dynamic setWorkHour(int hours) {
-    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
-        name: '_HomeControllerBase.setWorkHour');
-    try {
-      return super.setWorkHour(hours);
-    } finally {
-      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 currentDate: ${currentDate},
 workDays: ${workDays},
+currentMonthWeek: ${currentMonthWeek},
 monthText: ${monthText},
 selectedWorkDay: ${selectedWorkDay}
     ''';

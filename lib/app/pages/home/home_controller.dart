@@ -21,6 +21,11 @@ abstract class _HomeControllerBase with Store {
 		_dataWeek = _db.getWorkWeek();
 	}
 
+	int calculateMonthHours() {
+		var validDays = _dataDays.where((x) => x.day.month == currentDate.month && x.workHours != null && x.workHours > 0)?.map((x) => x.workHours)?.toList();
+		return validDays.reduce((value, element) => value + element);
+	}
+
 	@observable
 	DateTime currentDate = DateTime.now();
 

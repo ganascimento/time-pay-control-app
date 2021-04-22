@@ -21,12 +21,37 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
 
   @override
   Widget build(BuildContext context) {
+
+		infoHours() {
+			showDialog(
+				context: context,
+				builder: (_) {
+					return AlertDialog(
+						title: Text("Horas"),
+						content: Text("Foram realizadas " + controller.calculateMonthHours().toString() + " hora(s) de trabalho"),
+						actions: [
+							TextButton(
+								onPressed: () {
+									Navigator.pop(context);
+								},
+								child: Text("Ok"),
+							)
+						],
+					);
+				}
+			);
+		}
+
     return Scaffold(
       appBar: AppBar(
         title: Observer(
 					builder: (_) => Text(controller.monthText),
 				),
 				actions: [
+					IconButton(
+						icon: Icon(Icons.calculate_outlined),
+						onPressed: infoHours
+					),
 					IconButton(
 						icon: Icon(Icons.arrow_back_ios),
 						onPressed: () {
